@@ -1,0 +1,43 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserDao">
+
+	<select id="getUserByUsername" resultMap="RM_User" parameterType="String">
+		<![CDATA[
+		select * from user where UserName=#{username}
+		]]>
+	</select>
+	
+	<select id="queryAll" resultMap="RM_User">
+		<![CDATA[
+		select * from user
+		]]>
+	</select>
+	
+	<select id="queryOne" resultMap="RM_User" parameterType="Integer">
+		<![CDATA[
+		select * from user where IntId=#{id}
+		]]>
+	</select>
+	
+	<insert id="insertUser" parameterType="User">
+		insert into user (UserName,PassWord,ScoreFrom,fromDetail) values(#{userName},#{passWord},#{scoreFrom},#{fromDetail})
+	</insert>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from user where IntId=#{id}
+	</delete>
+	
+	<update id="update" parameterType="User">
+		update user set UserName=#{userName}, PassWord=#{passWord},ScoreFrom=#{scoreFrom},fromDetail=#{fromDetail} where IntId=#{intId}
+	</update>
+	
+	
+	<resultMap type="User" id="RM_User">
+		<id  column="IntId" property="intId" />
+		<result column="UserName" property="userName" />
+		<result column="PassWord" property="passWord" />
+		<result column="ScoreFrom" property="scoreFrom" />
+		<result column="fromDetail" property="fromDetail" />
+	</resultMap>
+
+</mapper>
